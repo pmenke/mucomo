@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "mucomo"
   gem.homepage = "http://github.com/pmenke/mucomo"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "Lightweight library for the representation and management of multimodal linguistic corpora."
+  gem.description = "mucomo is a lightweight library for the representation and management of multimodal corpora. It is a reference implementation of the data model which forms the central element of my ongoing dissertation project. This enterprise is associated with the project X1 \"Multimodal Alignment Corpora\" at the Collaborative Research Centre 673 \"Alignment in Communication\", funded by the German Research (DFG / Deutsche Forschungsgemeinschaft)."
   gem.email = "pmenke@googlemail.com"
   gem.authors = ["Peter Menke"]
   # dependencies defined in Gemfile
