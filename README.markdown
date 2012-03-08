@@ -6,6 +6,11 @@
 ## First steps
 
 
+## Naming conventions
+
+- **Identifiers** exist for internal purposes only, e.g. for the organization of ID/REF pairs in XML. 
+- **Names** are short and unique, but human-readable, keys or codes for a corpus or another object.
+- **Titles** are longer and more detailed names, often used in an official context.
 
 ## Contributing to mucomo
  

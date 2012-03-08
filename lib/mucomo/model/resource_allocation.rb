@@ -2,6 +2,8 @@
 
 class Mucomo::Model::ResourceAllocation
   
+  include Mucomo::Model::HasIdentifiers
+  
   attr_reader :resource
   attr_reader :trial
   attr_reader :design_component
@@ -12,7 +14,7 @@ class Mucomo::Model::ResourceAllocation
     @design_component = params_hash[:design_component] if params_hash.contains_key?(:design_component)
   end
   
-  # @todo access to containing corpus object
+  include Mucomo::Model::BelongsToCorpus
 
   # @todo access to associated trial
 

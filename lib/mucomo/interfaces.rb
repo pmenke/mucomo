@@ -1,0 +1,3 @@
+module Mucomo::Interfaces
+  
+end

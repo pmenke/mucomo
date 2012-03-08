@@ -2,7 +2,11 @@
 
 class Mucomo::Model::Design
   
-  attr_reader :name
+  # @todo id, meta, description
+  # @todo creator data, production status
+  
+  include Mucomo::Model::HasIdentifiers
+  
   attr_reader :design_components
   
   def initialize
@@ -10,6 +14,7 @@ class Mucomo::Model::Design
   end
   
   def add_design_component(design_component)
+    design_component.corpus=corpus if has_corpus?
     @design_components << design_component
   end
   
@@ -17,8 +22,10 @@ class Mucomo::Model::Design
     return @design_components.include?(design_component)
   end
   
-  # @todo access to containing corpus object
+  def trials
+    @corpus.trials_for_design(self)
+  end
   
-  # @todo access to associated trials
+  include Mucomo::Model::BelongsToCorpus
   
 end
