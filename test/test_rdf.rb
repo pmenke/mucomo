@@ -6,8 +6,11 @@ class TestExampleCorpus < Test::Unit::TestCase
   include Mucomo::Interfaces::XML
   
   def setup
+
     @corpus = Corpus.new
-    @corpus.name = "Example"
+    @corpus.id = "corpus01"
+    @corpus.name = "xmpl"
+    @corpus.title = "Example Corpus"
     @design = Design.new
     @design.name = "ExampleDesign"
     @design.id = "design0001"
@@ -55,25 +58,26 @@ class TestExampleCorpus < Test::Unit::TestCase
     @resource_part_2.name = "LayerBSpeech"
     @resource_part_2.internal_location = "layer:B.Speech"
     @resource_2.add_resource_part @resource_part_2
-    
+  
   end
-
-  def test_example_corpus_construction
+  
+  
+  def test_uri
     
-    assert_equal "Example", @corpus.name
-    assert_equal 1, @corpus.designs.size
-    assert_equal "ExampleDesign", @corpus.designs[0].name
-    assert_equal 2, @corpus.designs[0].design_components.size
-    assert_equal 4, @corpus.trials.size
-    assert_equal "V1", @corpus.trials[0].name
-    
-    puts @corpus.to_yaml
+    assert @corpus.get_uri_for_rdf
+    assert @corpus.get_uri_for_rdf.index(Mucomo::Interfaces::RDF::BASE_URI)
     
   end
   
-  def test_export_example_corpus
-    # puts @corpus.methods
-    @corpus.to_xml("/Users/pmenke/MucomoExampleCorpus.xml")
+  
+  def test_ntriples_export
+    
+    assert @corpus.to_ntriples
+    assert @corpus.to_rdf.size
+    puts @corpus.to_rdf.size
+    puts @corpus.to_ntriples
+    
   end
+  
 
 end

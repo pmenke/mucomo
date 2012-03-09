@@ -2,12 +2,10 @@
 
 class Mucomo::Model::Trial
   
+  # this include adds the attributes id, name, title to this class.
   include Mucomo::Model::HasIdentifiers
   
-  #
-  attr_accessor :identifier
-  
-  attr_accessor :serial_number
+  attr_accessor :serial_number # range: positive integer numbers
   
   extend Mucomo::Model::BelongsToCorpus
     

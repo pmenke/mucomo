@@ -4,12 +4,13 @@ class Mucomo::Model::Resource
   
   # @todo meta, description
   
+  # this include adds the attributes id, name, title to this class.
   include Mucomo::Model::HasIdentifiers
   
-  #
-  attr_accessor :media_type
-  attr_accessor :uri
-  attr_reader :resource_parts
+  
+  attr_accessor :media_type # media_type is a restricted vocabulary, see XML schema file
+  attr_accessor :uri # the URI where this resource can be retrieved, this URI should be used as RDF uri.
+  attr_reader :resource_parts # array of ResourcePart objects.
   
   def initialize
     @resource_parts = Array.new

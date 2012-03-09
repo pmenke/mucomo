@@ -4,11 +4,11 @@ class Mucomo::Model::DesignComponent
   
   # @todo participant, meta, description
   
+  # this include adds the attributes id, name, title to this class.
   include Mucomo::Model::HasIdentifiers
   
-  #
-  attr_accessor :media_type
-  attr_accessor :required
+  attr_accessor :media_type # media_type's range is a restricted vocabulary, see XML schema file
+  attr_accessor :required # boolean
   
   attr_reader :design
   

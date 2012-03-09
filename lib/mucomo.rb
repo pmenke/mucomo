@@ -18,6 +18,7 @@ require 'mucomo/model/trial.rb'
 #puts "REQUIRING INTERFACES"
 require 'mucomo/interfaces.rb'
 require 'mucomo/interfaces/xml.rb'
+require 'mucomo/interfaces/rdf.rb'
 
 #puts "REQUIRING UTILS"
 require 'mucomo/util.rb'

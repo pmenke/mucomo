@@ -2,12 +2,13 @@
 
 class Mucomo::Model::Design
   
-  # @todo id, meta, description
+  # @todo meta, description
   # @todo creator data, production status
   
+  # this include adds the attributes id, name, title to this class.
   include Mucomo::Model::HasIdentifiers
   
-  attr_reader :design_components
+  attr_reader :design_components # array of DesignComponent objects
   
   def initialize
     @design_components = Array.new

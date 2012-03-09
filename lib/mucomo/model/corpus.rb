@@ -2,14 +2,15 @@
 
 class Mucomo::Model::Corpus
   
+  # this include adds the attributes id, name, title to this class.
   include Mucomo::Model::HasIdentifiers
   
-  attr_reader :properties
-  attr_reader :designs
-  attr_reader :trials
-  attr_reader :resources
-  attr_reader :resource_allocations
-  attr_reader :resource_part_allocations
+  attr_reader :properties # array of property objects. not yet implemented.
+  attr_reader :designs # array of Design objects.
+  attr_reader :trials # array of Trial objects.
+  attr_reader :resources # array of Resource objects.
+  attr_reader :resource_allocations # array of ResourceAllocation objects.
+  attr_reader :resource_part_allocations # array of ResourcePartAllocation objects.
   
   def initialize
     puts "New Corpus!"
