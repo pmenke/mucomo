@@ -25,11 +25,8 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:ComponentAllocations, RDF.type, RDFS.Class]
 
 		# subclasses
-		graph << [:MetaEntry, RDFS.subClassOf, :Meta]
-		graph << [:MetaEntryKeys, RDFS.subClassOf, :Meta]
 		graph << [:ResourceAllocation, RDFS.subClassOf, :Allocation] 
-		graph << [:ResourcePartAllocation, RDFS.subClassOf, :ResourceAllocation] # TODO oder von Allocation?
-		graph << [:ResourcePart, RDFS.subClassOf, :Resource] # TODO tatsächlich??
+		graph << [:ResourcePartAllocation, RDFS.subClassOf, :Allocation] 
 
 		# corpus properties
 		graph << [:hasType, RDF.type, RDFS.Property]
@@ -49,24 +46,40 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:hasResourcePartAllocation, RDF.type, RDFS.Property]
 		graph << [:hasResourcePartAllocation, RDFS.subPropertyOf, :hasType]
 		graph << [:hasResourcePartAllocation, RDFS.range, :ResourcePartAllocation]
-		graph << [:hasMeta, RDF.type, RDFS.Property] # TODO abhängig von Design, DesignComponent und Resource?
-		graph << [:hasMeta, RDFS.subPropertyOf, :hasType] # TODO abhängig von Design, DesignComponent und Resource?
-		graph << [:hasMeta, RDFS.range, :Meta] # TODO abhängig von Design, DesignComponent und Resource?
-		graph << [:hasVariable, RDF.type, RDFS.Property] # TODO without any connection
-		graph << [:hasVariable, RDFS.subPropertyOf, :hasType] # TODO without any connection
-		graph << [:hasVariable, RDFS.range, :Variable]# TODO without any connection
+		graph << [:hasVariable, RDF.type, RDFS.Property] 
+		graph << [:hasVariable, RDFS.subPropertyOf, :hasType] 
+		graph << [:hasVariable, RDFS.range, :Variable]
+
+		# property hasMeta
+		graph << [:hasMeta, RDF.type, RDFS.Property] 
+		graph << [:hasMeta, RDFS.range, :Meta]
+		graph << [:hasMeta, RDFS.domain, :Corpus]
+		graph << [:hasMeta, RDFS.domain, :Design]
+		graph << [:hasMeta, RDFS.domain, :Resource]
+		graph << [:hasMeta, RDFS.domain, :ResourcePart] # TODO sure?
+		graph << [:hasMeta, RDFS.domain, :DesignComponent]
+
+                # property metaEntry
+		graph << [:metaEntry, RDF.type, RDFS.Property] 
+		graph << [:metaEntry, RDFS.domain, :Meta] 
+		graph << [:metaEntry, RDFS.range, RDFS.Literal] # TODO string
+
+                # property metaEntryKeys
+		graph << [:metaEntryKeys, RDF.type, RDFS.Property] 
+		graph << [:metaEntryKeys, RDFS.domain, :Meta]
+		graph << [:metaEntryKeys, RDFS.range, RDFS.Literal] # TODO string
 
 		# property title
 		graph << [:hasTitle, RDF.type, RDF.Property]
 		graph << [:hasTitle, RDFS.range, RDFS.Literal] # TODO string
-		graph << [:hasName, RDFS.domain, :Corpus]
-		graph << [:hasName, RDFS.domain, :Design]
-		graph << [:hasName, RDFS.domain, :Resource]
-		graph << [:hasName, RDFS.domain, :ResourcePart]
-		graph << [:hasName, RDFS.domain, :Participant]
-		graph << [:hasName, RDFS.domain, :DesignComponent]
-		graph << [:hasName, RDFS.domain, :Variable]
-		graph << [:hasName, RDFS.domain, :Trial]
+		graph << [:hasTitle, RDFS.domain, :Corpus]
+		graph << [:hasTitle, RDFS.domain, :Design]
+		graph << [:hasTitle, RDFS.domain, :Resource]
+		graph << [:hasTitle, RDFS.domain, :ResourcePart]
+		graph << [:hasTitle, RDFS.domain, :Participant]
+		graph << [:hasTitle, RDFS.domain, :DesignComponent]
+		graph << [:hasTitle, RDFS.domain, :Variable]
+		graph << [:hasTitle, RDFS.domain, :Trial]
 
 		# property name
 		graph << [:hasName, RDF.type, RDF.Property]
@@ -98,7 +111,7 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:designComponent, RDFS.range, :DesignComponent]
 
 		# property creatorData # TODO not in corpus-1.0.pdf
-		graph << [:creatorData, RDF.type, RDF.Property]
+=begin		graph << [:creatorData, RDF.type, RDF.Property]
 		graph << [:creatorData, RDFS.domain, :Design]
 		graph << [:creatorData, RDFS.range, RDFS.Literal] # TODO no idea
 
@@ -106,12 +119,15 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:productionStatus, RDF.type, RDF.Property]
 		graph << [:productionStatus, RDFS.domain, :Design]
 		graph << [:productionStatus, RDFS.range, RDFS.Literal] # TODO no idea
+=end
 
-		# property description # TODO not in corpus-1.0.pdf
+		# property description
 		graph << [:description, RDF.type, RDF.Property]
 		graph << [:description, RDFS.domain, :Design]
 		graph << [:description, RDFS.domain, :Resource]
 		graph << [:description, RDFS.domain, :DesignComponent]
+		graph << [:description, RDFS.domain, :Corpus]
+		graph << [:description, RDFS.domain, :ResourcePart] # TODO sure?
 		graph << [:description, RDFS.range, RDFS.Literal] # TODO no idea
 
 		# property required
@@ -119,15 +135,10 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:required, RDFS.range, RDFS.Literal] # TODO boolean
 		graph << [:required, RDFS.domain, :DesignComponent] 
 
-		# property participant # TODO not in corpus-1.0.pdf
+		# property participant
 		graph << [:participant, RDF.type, RDF.Property]
 		graph << [:participant, RDFS.range, :Participant] 
 		graph << [:participant, RDFS.domain, :DesignComponent] 
-
-		# property correspondingDesignComponent (or does this connection work over Allocations, NOT SURE)
-		graph << [:correspondingDesignComponent, RDF.type, RDF.Property]
-		graph << [:correspondingDesignComponent, RDFS.domain, :Trial]
-		graph << [:correspondingDesignComponent, RDFS.range, :DesignComponent]
 
 		# property mediaType
 		graph << [:mediaType, RDF.type, RDF.Property]
@@ -135,10 +146,10 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:mediaType, RDFS.domain, :DesignComponent] 
 		graph << [:mediaType, RDFS.range, :MediaType]
 
-		# property type (participantValue was type in written schema)
-		graph << [:participantValue, RDF.type, RDF.Property]
-		graph << [:participantValue, RDFS.domain, :Participant] 
-		graph << [:participantValue, RDFS.range, :ParticipantValue]
+		# property type
+		graph << [:participantType, RDF.type, RDF.Property]
+		graph << [:participantType, RDFS.domain, :Participant] 
+		graph << [:participantType, RDFS.range, :ParticipantValue]
 
 		# property participant
 		graph << [:participant, RDF.type, RDF.Property]
