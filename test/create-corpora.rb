@@ -62,16 +62,16 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
                 # property metaEntry
 		graph << [:metaEntry, RDF.type, RDFS.Property] 
 		graph << [:metaEntry, RDFS.domain, :Meta] 
-		graph << [:metaEntry, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:metaEntry, RDFS.range, XSD.String] 
 
                 # property metaEntryKeys
 		graph << [:metaEntryKeys, RDF.type, RDFS.Property] 
 		graph << [:metaEntryKeys, RDFS.domain, :Meta]
-		graph << [:metaEntryKeys, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:metaEntryKeys, RDFS.range, XSD.String] 
 
 		# property title
 		graph << [:hasTitle, RDF.type, RDF.Property]
-		graph << [:hasTitle, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:hasTitle, RDFS.range, XSD.String]
 		graph << [:hasTitle, RDFS.domain, :Corpus]
 		graph << [:hasTitle, RDFS.domain, :Design]
 		graph << [:hasTitle, RDFS.domain, :Resource]
@@ -83,7 +83,7 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 
 		# property name
 		graph << [:hasName, RDF.type, RDF.Property]
-		graph << [:hasName, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:hasName, RDFS.range, XSD.String] 
 		graph << [:hasName, RDFS.domain, :Corpus]
 		graph << [:hasName, RDFS.domain, :Design]
 		graph << [:hasName, RDFS.domain, :Resource]
@@ -95,7 +95,7 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 
 		# propoerty id
 		graph << [:hasId, RDF.type, RDF.Property]
-		graph << [:hasId, RDFS.range, RDFS.Literal] # TODO id
+		graph << [:hasId, RDFS.range, XSD.Integer]
 		graph << [:hasId, RDFS.domain, :Corpus]
 		graph << [:hasId, RDFS.domain, :Participant]
 		graph << [:hasId, RDFS.domain, :Variable]
@@ -111,15 +111,14 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:designComponent, RDFS.range, :DesignComponent]
 
 		# property creatorData # TODO not in corpus-1.0.pdf
-=begin		graph << [:creatorData, RDF.type, RDF.Property]
-		graph << [:creatorData, RDFS.domain, :Design]
-		graph << [:creatorData, RDFS.range, RDFS.Literal] # TODO no idea
+         	#graph << [:creatorData, RDF.type, RDF.Property]
+		#graph << [:creatorData, RDFS.domain, :Design]
+		#graph << [:creatorData, RDFS.range, XSD.String] 
 
 		# property productionStatus # TODO not in corpus-1.0.pdf
-		graph << [:productionStatus, RDF.type, RDF.Property]
-		graph << [:productionStatus, RDFS.domain, :Design]
-		graph << [:productionStatus, RDFS.range, RDFS.Literal] # TODO no idea
-=end
+		#graph << [:productionStatus, RDF.type, RDF.Property]
+		#graph << [:productionStatus, RDFS.domain, :Design]
+		#graph << [:productionStatus, RDFS.range, XSD.String]
 
 		# property description
 		graph << [:description, RDF.type, RDF.Property]
@@ -128,11 +127,11 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		graph << [:description, RDFS.domain, :DesignComponent]
 		graph << [:description, RDFS.domain, :Corpus]
 		graph << [:description, RDFS.domain, :ResourcePart] # TODO sure?
-		graph << [:description, RDFS.range, RDFS.Literal] # TODO no idea
+		graph << [:description, RDFS.range, XSD.String] 
 
 		# property required
 		graph << [:required, RDF.type, RDF.Property]
-		graph << [:required, RDFS.range, RDFS.Literal] # TODO boolean
+		graph << [:required, RDFS.range, XSD.Boolean] 
 		graph << [:required, RDFS.domain, :DesignComponent] 
 
 		# property participant
@@ -168,18 +167,18 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 
 		# property key
 		graph << [:key, RDF.type, RDF.Property]
-		graph << [:key, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:key, RDFS.range, XSD.String] 
 		graph << [:key, RDFS.domain, :MetaEntry] 
 
 		# property code
 		graph << [:code, RDF.type, RDF.Property]
-		graph << [:code, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:code, RDFS.range, XSD.String] 
 		graph << [:code, RDFS.domain, :Participant] 
 
 		# property variable
 		graph << [:variable, RDF.type, RDF.Property]
 		graph << [:variable, RDFS.range, :Variable]
-		graph << [:variable, RDFS.domain, :VariableAllocation] #TODO fehlt in rdf.rb
+		graph << [:variable, RDFS.domain, :VariableAllocation]
 
 		# property resource
 		graph << [:resource, RDF.type, RDF.Property]
@@ -208,7 +207,7 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 
 		# property serialNumber
 		graph << [:serialNumber, RDF.type, RDF.Property]
-		graph << [:serialNumber, RDFS.range, RDFS.Literal] # TODO unsigned int
+		graph << [:serialNumber, RDFS.range, XSD.Integer] 
 		graph << [:serialNumber, RDFS.domain, :Trial]
 
 		# property design
@@ -219,6 +218,6 @@ RDF::Writer.open("multimodal-corpora.nt") do |writer|
 		# property internalLocation
 		graph << [:internalLocation, RDF.type, RDF.Property]
 		graph << [:internalLocation, RDFS.domain, :ResourcePart] 
-		graph << [:internalLocation, RDFS.range, RDFS.Literal] # TODO string
+		graph << [:internalLocation, RDFS.range, XSD.String] 
 	end
 end
