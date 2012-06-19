@@ -13,6 +13,7 @@ class TestExampleCorpus < Test::Unit::TestCase
     @corpus.title = "Example Corpus"
     @design = Design.new
     @design.name = "ExampleDesign"
+    @design.title = "Example Design"
     @design.id = "design0001"
     @design_component_1 = DesignComponent.new
     @design_component_1.id = "designcomponent0001"

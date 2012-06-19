@@ -102,6 +102,7 @@ module Mucomo
       def to_rdf()
         graph = RDF::Graph.new
         as_rdf(Array.new).each do |triple|
+          puts triple
           graph << triple
         end
         return graph
@@ -118,7 +119,7 @@ module Mucomo
       end
         
       def get_uri_for_rdf
-        return "#{::Mucomo::Interfaces::RDF::BASE_URI}/corpora/#{self.id}"
+        return RDF::URI("#{::Mucomo::Interfaces::RDF::BASE_URI}/corpora/#{self.id}")
       end
       
     end
@@ -142,9 +143,9 @@ module Mucomo
         triples << [get_uri_for_rdf, "hasId", id]
         triples << [get_uri_for_rdf, "hasName", name]
         triples << [get_uri_for_rdf, "hasTitle", title]
-        triples << [get_uri_for_rdf, "creatorData", creator_data] # TODO not in design.rb yet
-        triples << [get_uri_for_rdf, "productionStatus", production_status] # TODO not in design.rb yet
-        triples << [get_uri_for_rdf, "description", description] # TODO not in design.rb yet
+        # triples << [get_uri_for_rdf, "creatorData", creator_data] # TODO not in design.rb yet
+        # triples << [get_uri_for_rdf, "productionStatus", production_status] # TODO not in design.rb yet
+        # triples << [get_uri_for_rdf, "description", description] # TODO not in design.rb yet
 
         # pass complex objects along
         # pass design components along
@@ -211,7 +212,7 @@ module Mucomo
         triples << [get_uri_for_rdf, "hasTitle", title]
         triples << [get_uri_for_rdf, "serialNumber", serial_number]
         triples << [get_uri_for_rdf, "design", design]
-        triples << [get_uri_for_rdf, "correspondingDesignComponent", design_component]
+        # triples << [get_uri_for_rdf, "correspondingDesignComponent", design_component]
 
         return triples
       end
@@ -258,7 +259,7 @@ module Mucomo
         triples << [get_uri_for_rdf, "hasTitle", title]
         triples << [get_uri_for_rdf, "mediaType", media_type] # TODO change to complex object MediaType?
         triples << [get_uri_for_rdf, "uri", uri]
-        triples << [get_uri_for_rdf, "description", description] # TODO not in resource.rb yet
+        # triples << [get_uri_for_rdf, "description", description] # TODO not in resource.rb yet
 
         # pass complex objects along
         # pass resource parts along
@@ -413,17 +414,18 @@ module Mucomo
         triples << [get_uri_for_rdf, "mediaType", media_type] # TODO change to complex object MediaType?
         triples << [get_uri_for_rdf, "required", required]
         triples << [get_uri_for_rdf, "design", design]
-        triples << [get_uri_for_rdf, "description", description] # TODO not in design_component.rb yet
+        # triples << [get_uri_for_rdf, "description", description] # TODO not in design_component.rb yet
 
         # pass complex objects along
         # pass participants along TODO participant.rb does not exist
-        @participants.each do |participant|
+        
+        #@participants.each do |participant|
           
-          puts "Export Participant to RDF"
-          triples << [get_uri_for_rdf, "participant", participant]
-          triples = participant.as_rdf(triples)
+        #  puts "Export Participant to RDF"
+        #  triples << [get_uri_for_rdf, "participant", participant]
+        #  triples = participant.as_rdf(triples)
           
-        end   
+        #end   
 
         # pass meta along # TODO
         #@metas.each do |meta|
